@@ -88,6 +88,7 @@
 	---->
 	<cftry>
 		
+		<cfif !findnocase('Linux',systemname)>
 		<cfoutput>
 			<cfif findnocase('mac',systemname)>
 				<cfset checkbatchfilename = expandpath('checkDB.sh') />
@@ -156,6 +157,7 @@
 				<cfset messages['database'].status = 'good' />	
 			</cfif>	
 		</cfoutput>
+		</cfif>
 		<cfset dbCreated=true/>	
 	<cfcatch type="any">		<!--- 		<cfdump  var="#cfcatch#" abort="false"> --->
 
@@ -192,36 +194,15 @@
 				messages['datasource'].status = 'medium';  
 				
 			}else{
-				// myObj.setMYSQL5(driver="MySQL5", 
-			  //       name="#database#", 
-			  //       host = "#form.mysqlip#", 
-			  //       port = "#form.mysqlport#",
-			  //       database = "#database#",
-			  //       username = "root",
-			  //       password = "#form.mysqlroot#",
-			  //       login_timeout = "29",
-			  //       timeout = "23",
-			  //       interval = 6,
-			  //       buffer = "64000",
-			  //       blob_buffer = "64000",
-			  //       setStringParameterAsUnicode = "false",
-			  //       description = "learncfinaweek sample database",
-			  //       pooling = true,
-			  //       maxpooledstatements = 999,
-			  //       enableMaxConnections = "true",
-			  //       maxConnections = "299",
-			  //       disable_clob = false,
-			  //       disable_blob = false,
-			  //       disable = false,
-			  //       storedProc = false,
-			  //       alter = true,
-			  //       grant = false,
-			  //       select = true,
-			  //       update = true,
-			  //       create = true,
-			  //       delete = true,
-			  //       drop = true,
-			  //       revoke = false );
+				myObj.setOther(
+					name="#database#",
+					url="jdbc:mysql://#form.mysqlip#:#form.mysqlport#/#database#?allowPublicKeyRetrieval=true&useSSL=false",
+					class="com.mysql.cj.jdbc.Driver",
+					driver="",
+					username="root",
+					password = "#form.mysqlroot#",
+					description = "learncfinaweek sample database"
+				);
 			        
 			  //  messages['datasource'].message = 'Datasource created succesfully';
 			  //  messages['datasource'].status = 'good';  

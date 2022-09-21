@@ -1,8 +1,6 @@
 {
-    "app":{
-        "libDirs":"./cbJars/",
-        "cfengine":"adobe@2018"
+    "scripts":{
+        "onServerInstall":"cfpm install debugger,caching,orm,mail,ajax,document,pdf,spreadsheet"
     },
-    "cfconfigfile":"./cfconfig/myLearnConfig.json",
-    "name":"learnCFinaWeekTutorial"
+    "cfconfigfile":"./cfconfig/customCFConfig.json"
 }

@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  app:
+    container_name: learncfinaweek_app
+    image: ortussolutions/commandbox:adobe2021
+    ports:
+      - '8500:8500'
+    environment:
+      - PORT=8500
+      - BOX_SERVER_PROFILE=development
+      - BOX_SERVER_APP_CFENGINE=adobe@2021
+      - cfconfig_adminPassword=123
+      - cfconfig_debuggingEnabled=true
+      - cfconfig_robustExceptionEnabled=true
+      - cfconfig_ajaxDebugWindowEnabled=true
+    volumes:
+      - ./v1sampleFiles:/app
+      - local-cfhome:/usr/local/lib/serverHome
+    depends_on:
+      - mysql
+    links:
+      - "mysql:database"
+  mysql:
+    container_name: learncfinaweek_mysql
+    build: ./mysql
+    restart: 'always'
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+    volumes:
+      - local-mysqlvolume:/var/lib/mysql
+    
+volumes:
+  local-mysqlvolume:
+  local-cfhome:

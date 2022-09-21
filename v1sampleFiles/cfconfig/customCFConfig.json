@@ -1,0 +1,12 @@
+{
+    "mailServers":[
+        {
+            "tls":false,
+            "password":"",
+            "port":25,
+            "username":"",
+            "ssl":false,
+            "smtp":"localhost"
+        }
+    ]
+}
